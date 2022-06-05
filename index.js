@@ -46,5 +46,5 @@ class TableDefinition {
 		}
 	}
 }
-exports.TableDefinition = TableDefinition;
+module.exports.TableDefinition = TableDefinition;
  
