@@ -1,15 +1,10 @@
 {
 	"name": "node-red-contrib-tretawn-classes",
-	"version": "1.0.2",
-	"description": "",
+	"version": "1.0.3",
+	"description": "My Classes",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"node-red": {
-		"nodes": {
-			"tretawn": "tretawn.js"
-		}
 	},
 	"author": "",
 	"license": "ISC"
