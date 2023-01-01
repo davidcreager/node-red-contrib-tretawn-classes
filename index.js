@@ -115,7 +115,7 @@ class TableDefinition {
 		applyInitialGroups(this.groups, tabulator.columns);
 		if ( !tabulator.columns[0].columns && this.tableHeader && tabulator.columns.length != 1) {
 			const subColumns = [...tabulator.columns];
-			tabulator.columns = [ {title:  + "<p><center style=" + this.tableHeaderStyle + ">" +  this.tableHeader + "</center></p>", columns: subColumns} ];
+			tabulator.columns = [ {title: "<p><center style=" + this.tableHeaderStyle + ">" +  this.tableHeader + "</center></p>", columns: subColumns} ];
 		}
 		this.tabulator = {...{ index: this.rowIndex, cellEdited: cellEdited, rowUpdated: rowUpdated, layout: "fitColumns", groupBy:""},
 							...tabulator};
