@@ -71,12 +71,14 @@ class TableDefinition {
 			dbKeys = null, dbSubProp = null, dbSubKeys = null,
 			fileName = null, refreshable = false, refreshTime = 20,
 			timeField, recentCheck, staleCheck, dashBoardTab, addRowFields = [],
+			tableHeaderStyle = "color: white;font-size: large;font-weight: 800;background-color: DarkGreen",
 			groups = [],
 			toFile, fromFile
 		} = details;
 		this.tableName = tableName;
 		this.tableKeys = (typeof(tableKeys) == "string") ? [tableKeys] : tableKeys;
 		this.tableHeader = (tableHeader == false) ? false : tableHeader || tableName;
+		this.tableHeaderStyle = tableHeaderStyle;
 		this.dbKeys = (typeof(dbKeys) == "string") ? [dbKeys] : dbKeys;
 		this.dbSubKeys = (typeof(dbSubKeys) == "string") ? [dbSubKeys] : dbSubKeys;
 		this.dbSubProp = dbSubProp;
@@ -113,7 +115,7 @@ class TableDefinition {
 		applyInitialGroups(this.groups, tabulator.columns);
 		if ( !tabulator.columns[0].columns && this.tableHeader && tabulator.columns.length != 1) {
 			const subColumns = [...tabulator.columns];
-			tabulator.columns = [ {title: "<p><center style='font-size: x-large;font-weight: bolder;'>" +  this.tableHeader + "</center></p>", columns: subColumns} ];
+			tabulator.columns = [ {title:  + "<p><center style=" + this.tableHeaderStyle + "font-size: x-large;font-weight: bolder;" + ">" +  this.tableHeader + "</center></p>", columns: subColumns} ];
 		}
 		this.tabulator = {...{ index: this.rowIndex, cellEdited: cellEdited, rowUpdated: rowUpdated, layout: "fitColumns", groupBy:""},
 							...tabulator};
