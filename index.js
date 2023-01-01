@@ -67,7 +67,7 @@ class TableDefinition {
 	constructor (details) {
 		try {
 		const {
-			tableName, tableKeys, tableVariableDetails = null, rowIndex = "id",
+			tableName, tableKeys, tableVariableDetails = null, tableHeader = null, rowIndex = "id",
 			dbKeys = null, dbSubProp = null, dbSubKeys = null,
 			fileName = null, refreshable = false, refreshTime = 20,
 			timeField, recentCheck, staleCheck, dashBoardTab, addRowFields = [],
@@ -76,6 +76,7 @@ class TableDefinition {
 		} = details;
 		this.tableName = tableName;
 		this.tableKeys = (typeof(tableKeys) == "string") ? [tableKeys] : tableKeys;
+		this.tableHeader = (tableHeader == false) ? false : tableHeader || tableName;
 		this.dbKeys = (typeof(dbKeys) == "string") ? [dbKeys] : dbKeys;
 		this.dbSubKeys = (typeof(dbSubKeys) == "string") ? [dbSubKeys] : dbSubKeys;
 		this.dbSubProp = dbSubProp;
@@ -110,7 +111,11 @@ class TableDefinition {
 		let rForm = createRowFormatter(this.timeField, this.recentCheck, this.staleCheck);
 		this.tabulator = tabulator;
 		applyInitialGroups(this.groups, tabulator.columns);
-		this.tabulator = {...{ index: this.rowIndex, cellEdited: cellEdited, rowUpdated: rowUpdated, layout: "fitColumns", movableColums: false, groupBy:""},
+		if ( !tabulator.columns[0].columns && this.tableHeader && tabulator.columns.length != 1) {
+			const subColumns = [...tabulator.columns];
+			tabulator.columns = [ {title: "<p><center style='font-size: x-large;font-weight: bolder;'>" +  this.tableHeader + "</center></p>", columns: subColumns} ];
+		}
+		this.tabulator = {...{ index: this.rowIndex, cellEdited: cellEdited, rowUpdated: rowUpdated, layout: "fitColumns", groupBy:""},
 							...tabulator};
 		if (rForm) this.tabulator.rowFormatter = rForm
 	}
